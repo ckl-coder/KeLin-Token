@@ -3,12 +3,27 @@
 ## 项目介绍
 这是我的第一个区块链代币项目，基于 Solidity + Hardhat 开发。
 
+## 📊 代币信息
+
+| 项目         | 内容                                   |
+|--------------|----------------------------------------|
+| 代币名称     | KeLin                                  |
+| 符号         | KL                                     |
+| 总供应量     | 100,000,000 KL                         |
+| 小数位       | 18                                     |
+| 网络         | Ethereum Sepolia（即将上主网）          |
+| 合约地址     | `0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E` |
+| Etherscan    | https://sepolia.etherscan.io/address/0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E |
+
 ## 功能特性
 - 支持 ERC-20 标准接口
 - 测试网部署（Sepolia/BSC Testnet）
 - 自定义代币logo（已提交 Trust Wallet 审核）
+-------后续功能待做（加入流动性等）----------
 
 ## 部署步骤
-1. 安装依赖：npm install
-2. 编译合约：npx hardhat compile
-3. 部署到测试网：npx hardhat run scripts/deploy.js --network sepolia
+1. 项目初始化和安装依赖：npm install，npx hardhat --init,npm init -y
+2. 编写合约，脚本文件
+3. 编译合约：npx hardhat compile
+4. 部署到测试网：npx hardhat run scripts/deploy.js --network sepolia
+5. 构建简易一页式网页

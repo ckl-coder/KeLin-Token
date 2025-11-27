@@ -1,46 +1,87 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KeLin (KL) - 我的第一个 ERC20 代币</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KeLin (KL) | 我的第一个 ERC20 代币</title>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background: #000; color: #fff; text-align: center; padding: 50px 20px; }
-    .container { max-width: 800px; margin: 0 auto; }
-    h1 { font-size: 4rem; margin: 20px 0; background: linear-gradient(45deg, #00ff88, #0099ff); -webkit-background-clip: text; color: transparent; }
-    .logo { width: 150px; height: 150px; border-radius: 50%; border: 5px solid #00ff88; margin: 20px auto; }
-    .btn { display: inline-block; padding: 15px 40px; margin: 20px; background: #00ff88; color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.2rem; }
-    .btn:hover { background: #00cc66; }
-    .info { margin: 40px 0; line-height: 2; }
-    .contract { word-break: break-all; background: #111; padding: 15px; border-radius: 10px; margin: 20px auto; max-width: 600px; }
-    footer { margin-top: 100px; color: #666; }
+    body,html{margin:0;height:100%;font-family:'Arial',sans-serif;overflow:hidden;background:#000;color:#fff;}
+    #particles-js{position:absolute;width:100%;height:100%;background:#000;}
+    .content{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2;}
+    .logo{width:120px;height:120px;border-radius:50%;border:4px solid #00ff88;box-shadow:0 0 30px #00ff88;}
+    h1{font-size:4.5rem;background:linear-gradient(45deg,#00ff88,#00ccff);-webkit-background-clip:text;color:transparent;margin:10px 0;}
+    .tagline{font-size:1.6rem;margin:10px 0;opacity:0.9;}
+    .stats{background:rgba(255,255,255,0.1);padding:20px 40px;border-radius:20px;margin:20px 0;backdrop-filter:blur(10px);}
+    .btn{padding:15px 40px;margin:10px;background:#00ff88;color:#000;font-weight:bold;border-radius:50px;cursor:pointer;font-size:1.1rem;transition:0.3s;}
+    .btn:hover{background:#00cc66;transform:scale(1.05);}
+    .btn-outline{background:transparent;border:2px solid #00ff88;color:#00ff88;}
+    .btn-outline:hover{background:#00ff88;color:#000;}
+    .social{margin-top:30px;}
+    .social a{margin:0 15px;color:#00ff88;font-size:2rem;transition:0.3s;}
+    .social a:hover{transform:scale(1.3);}
+    footer{position:absolute;bottom:20px;width:100%;text-align:center;opacity:0.6;font-size:0.9rem;}
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://raw.githubusercontent.com/AmazingAng/WTF-Solidity/main/Assets/KL-logo.png" alt="KeLin Logo" class="logo">
-    <h1>KeLin (KL)</h1>
-    <p style="font-size:1.5rem;">我的第一个 ERC20 代币项目</p>
-    
-    <div class="info">
-      <p>总供应量:100,000,000 KL</p>
-      <p>小数位:18</p>
-      <p>网络:Ethereum Sepolia 测试网</p>
+  <div id="particles-js"></div>
+  <div class="content">
+    <img src="https://raw.githubusercontent.com/AmazingAng/WTF-Solidity/main/Assets/KL-logo.png" class="logo" alt="KeLin">
+    <h1>KeLin</h1>
+    <p class="tagline">我的第一个 ERC20 代币 · 总供应 100,000,000 KL</p>
+
+    <div class="stats">
+      <p>合约地址: <span id="contract">0xEE30...4f4E</span> 
+        <span onclick="copyAddress()" style="cursor:pointer;color:#00ff88;">[复制]</span>
+      </p>
+      <p>网络: Ethereum Sepolia 测试网</p>
+      <p id="balance">连接钱包查看 KL 余额</p>
     </div>
 
-    <div class="contract">
-      合约地址：<br>
-      0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E
+    <div>
+      <button class="btn" onclick="connectWallet()">连接钱包</button>
+      <a href="https://sepolia.etherscan.io/address/0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E" target="_blank" class="btn btn-outline">Etherscan</a>
+      <a href="https://app.uniswap.org/#/swap?chain=sepolia&outputCurrency=0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E" target="_blank" class="btn btn-outline">Uniswap</a>
     </div>
 
-    <a href="https://sepolia.etherscan.io/address/0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E" target="_blank" class="btn">查看合约</a>
-    <a href="https://app.uniswap.org/#/swap?chain=sepolia&inputCurrency=ETH&outputCurrency=0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E" target="_blank" class="btn">去 Uniswap 交易</a>
-
-    <p style="margin-top:50px;">Made with ❤️ by 一个刚入门的区块链新人</p>
+    <div class="social">
+      <a href="https://twitter.com/yourhandle" target="_blank">🐦</a>
+      <a href="https://t.me/yourgroup" target="_blank">✈️</a>
+      <a href="https://github.com/ckl-coder/KeLin-Token" target="_blank">🐙</a>
+    </div>
   </div>
 
   <footer>
-    © 2025 KeLin Token - All Rights Reserved
+    © 2025 KeLin Token • Made with ❤️ by ckl-coder
   </footer>
+
+  <script>
+    // 粒子背景
+    particlesJS("particles-js", {"particles":{"number":{"value":80},"color":{"value":"#00ff88"},"shape":{"type":"circle"},"opacity":{"value":0.5},"size":{"value":3},"move":{"enable":true,"speed":2}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"}}}});
+
+    // 一键复制合约地址
+    function copyAddress() {
+      navigator.clipboard.writeText("0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E");
+      alert("合约地址已复制！");
+    }
+
+    // 连接钱包 + 显示 KL 余额
+    async function connectWallet() {
+      if (window.ethereum) {
+        await ethereum.request({ method: 'eth_requestAccounts' });
+        const web3 = new Web3(ethereum);
+        const accounts = await web3.eth.getAccounts();
+        document.getElementById("balance").innerHTML = "钱包已连接: " + accounts[0].slice(0,8) + "...";
+
+        const tokenABI = [{"inputs":[],"stateMutability":"view","type":"function","name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}]},{"inputs":[],"stateMutability":"view","type":"function","name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}]}];
+        const token = new web3.eth.Contract(tokenABI, "0xEE303830d908Ac67CDC15e8D2257447C5E6B4f4E");
+        const balance = await token.methods.balanceOf(accounts[0]).call();
+        document.getElementById("balance").innerHTML += `<br>KL 余额: ${(balance / 1e18).toFixed(4)} KL`;
+      } else {
+        alert("请安装 MetaMask！");
+      }
+    }
+  </script>
 </body>
 </html>
